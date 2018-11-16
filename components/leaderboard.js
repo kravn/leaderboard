@@ -117,8 +117,8 @@ Vue.component('leaderboard', {
 			</v-container>
 
 			<v-container>
-				<v-layout class="table-top-players">
-					
+				<v-layout row wrap class="table-top-players">
+					<v-flex md12>
 						<v-data-table
 						:headers="prepareHeaders(headers[boardType])"
 						:items="players"
@@ -150,7 +150,7 @@ Vue.component('leaderboard', {
 								</tr>
 							</template>
 						</v-data-table>
-					
+					</v-flex>
 				</v-layout>
 			</v-container>
 		</div>

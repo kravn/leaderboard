@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="header">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title v-cloak>TCG - TTG Tournament Leaderboard</title>
+    <link rel="stylesheet" href="leaderboard/css/style.css">
+    <link rel="stylesheet" href="leaderboard/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
+    <script src="leaderboard/js/translations.js"></script>
+    <script src="leaderboard/promotion2/app.js"></script>
+    <script src="leaderboard/js/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="leaderboard/js/bootstrap.js"></script>
+</head>
+
+<body>
+    <div class="main" id="app">
+
+		<!-- BOOTSTRAP CAROUSEL -->
+        <div class="section no-padding section--carousel">
+            <div id="carouselControl" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="leaderboard/css/images/b2.png" alt="First slide">
+                    </div>
+                </div>
+            </div>
+            <div class="div-separator"></div>
+        </div>
+
+		<!-- LEADERBOARD PROMOTION PRIMARY DETAILS -->
+        <div class="section no-padding section--head">
+            
+            <div class="gradient-overlay"></div>
+
+            <!-- LANGUAGE SELECTOR -->
+            <div class="container">
+                <div class="div-separator-clear">
+                    <div v-if="langSelector" class="language-selector">
+                        <div class="lang-selector">
+                            <div class="lang-selected" @mouseover="isSelectorHidden = true">
+                                {{languages.find(item => item.code == lang).language}}
+                            </div>
+                            <div class="lang-list" v-if="isSelectorHidden" @mouseleave="isSelectorHidden = false">
+                                <p v-for="lang in languages">
+                                    <a :href="loadLanguage(lang.language, lang.code)" @click="selectedLanguage = lang.language">{{lang.language}}</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TITLE HEADER -->
+            <div class="container text-center">
+                <div class="container">
+                    <div class="section-header">
+                        {{headTitle[0].title}}
+                    </div>
+                    <div class="section-subheader">
+                        {{headTitle[0].subtitle}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		<!-- TOP PLAYER LIST -->
+        <div class="section section--body" v-cloak>
+
+            <div class="container">
+                <div class="section-items" v-for="item in texts[lang]">
+
+                    <div class="section-item" v-if="item.type == 'sentence'">
+                        <p class="title"><span>{{item.id}}</span>{{item.title}}</p>
+                        <p class="content">{{item.content}}</p>
+                    </div>
+
+                    <div class="section-item" v-if="item.type == 'bullets'">
+                        <p class="title"><span>{{item.id}}</span>{{item.title}}</p>
+                        <ul class="bullets">
+                            <li v-for="itm in item.children">{{itm}}</li>
+                        </ul>
+                    </div>
+
+                    <div class="section-item" v-if="item.type == 'table'">
+                        <p class="title"><span>{{item.id}}</span>{{item.title}}</p>
+                        <table class="table text-center">
+                            <tr v-for="(row, ctr) in item.children.items" :class="ctr == 0 ? 'table-head' : ctr %2 == 0 ? 'row1' : 'row2'">
+                                <td v-for="itm in row">{{itm}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container text-center">
+                <h1 class="section-header">
+                    <img src="leaderboard/css/images/leaderboard.png" alt="">
+                    <!--<b>{{ getTranslations(lang, labels, 'title', url.topNum) }} </b>-->
+                </h1>
+            </div>
+            
+
+            <div class="container text-center">         
+                <div class="promotion-details">
+                    <div class="detail">
+                        {{ getTranslations2(labels2[lang], 'start_date', url.topNum) }} <span>{{ url.fromDate }}</span>
+                    </div>
+                    <div class="detail">
+                        {{ getTranslations2(labels2[lang], 'end_date', url.topNum) }} <span>{{ url.toDate }}</span>
+                    </div>
+                    <div class="detail">
+                        {{ getTranslations2(labels2[lang], 'last_refresh', url.topNum) }} <span>{{ timeToHMS() }}</span>
+                    </div>
+                </div>
+            </div>  
+
+            <div class="container text-center">
+                <div class="section-title">
+                    {{ getTranslations2(labels2[lang], 'participating_games', url.topNum) }}
+                </div>
+                <div class="participating-games">
+                    <span v-for="game in splitGameIds(url.gameIds)" class="badge">{{ getParticipatingGames2(game, lang) }}</span>
+                </div>
+            </div>          
+                   
+            <div class="container text-center">
+                <div class="leaderboard-list text-center">
+                    <div class="section-title">
+                        {{ getTranslations2(labels2[lang], 'top_players', url.topNumLimit) }}
+                    </div>
+                    <table class="leaderboard-table">
+                        <tr>
+                            <th><i class="fas fa-trophy"></i></th>
+                            <th>{{ getTranslations2(labels2[lang], 'player', url.topNum) }}</th>
+                            <th>{{ getTranslations2(labels2[lang], 'total_wager', url.topNum) }}</th>
+                            <th>{{ getTranslations2(labels2[lang], 'prize', url.topNum) }}</th>
+                        </tr>
+                        <tr v-for="(player, i) in getTopPlayers(leaderboard.players)" class="nominees" v-if="i >= url.topNumLimit" >
+                            <td>{{ i+1 }}</td>
+                            <td>{{ maskedString(player[1].name, i) }}</td>
+                            <td>{{ commarize(player[1].totalHandle) }}</td>
+                            <td>{{ prizes[i] ? prizes[i] : '-' }}</td>
+                        </tr>
+                        <tr v-else :class="i %2 == 0 ? 'row1' : 'row2'">
+                            <td>{{ i+1 }}</td>
+                            <td>{{ maskedString(player[1].name, i) }}</td>
+                            <td>{{ commarize(player[1].totalHandle) }}</td>
+                            <td>{{ prizes[i] ? prizes[i] : '-' }}</td>
+                        </tr>
+                        <tr class="see-more">
+                            <td colspan="4" v-if="getTopPlayers(leaderboard.players) != false">
+                                <div @click="toggleList" v-show="toggleMorePlayers">
+                                    {{ getTranslations2(labels2[lang], 'show_more', url.topNum) }}
+                                </div>
+                                <div @click="toggleList" v-show="toggleLessPlayers">
+                                    {{ getTranslations2(labels2[lang], 'show_less', url.topNum) }}
+                                </div>
+                            </td>
+                            <td colspan="4" v-else>
+                                {{ getTranslations2(labels2[lang], 'no_record_found', url.topNum) }}
+                            </td>
+                        </tr>
+                    </table>
+                </div>      
+            </div>   
+        </div>
+
+		<!-- TERMS AND CONDITIONS -->
+        <div v-if="app.termsAndConditions" class="section section--terms-and-conditions">
+            <div class="terms-and-conditions">
+                <div class="container">
+                    <div class="section-header">
+                        <img src="leaderboard/css/images/terms-and-conditions.png" alt="">
+                    </div>
+                    <div class="section-body">
+
+                        <!-- TEXT DISPLAYED FROM TRANSLATIONS -> TERMS AND CONDITIONS -> PROMOTION DETAILS -->
+                        <div class="text-item" v-for="item in translations.terms_and_conditions.promotion_details[lang]">
+                            <div v-if="item.type=='title'" class="sz2">
+                                {{item.label}}
+                                <span>{{item.value}}</span>
+                            </div>
+
+                            <div v-if="item.type=='subtitle'" class="sz1">
+                                {{item.label}} <span>{{item.value}}</span>
+                                <div v-if="item.children">
+                                    <div v-if="item.children.type=='normal'">
+                                        <span class="item" v-for="itm in item.children.values">{{itm}}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div v-if="item.type=='normal'" class="normal">
+                                {{item.label}} <span>{{item.value}}</span>
+                                <div class="extend" v-if="item.children">
+                                    <div v-if="item.children.type=='subtitle'">
+                                        <span class="values" v-for="itm in item.children.values">{{itm}}</span>
+                                    </div>
+                                    <div v-if="item.children.type=='normal'">
+                                        <span class="item" v-for="itm in item.children.values">{{itm}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="spacer" v-if="item.type=='subtitle' || item.type=='title'"></p>
+                        </div>
+
+                        <!-- TEXT DISPLAYED FROM TRANSLATIONS -> TERMS AND CONDITIONS -> EXTENDED DETAILS -->
+                        <div class="text-item" v-for="item in translations.terms_and_conditions.extended_details[lang]">
+                            <div v-if="item.type == 'red'" class="red">
+                                {{item.label}}
+                            </div>
+                            <div v-if="item.type == 'white'" class="white">
+                                {{item.label}}
+                            </div>
+                        </div>
+                        <div class="spacer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section section--footer">
+        	
+        </div>
+
+    </div>
+
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+    <script>
+        $('.more-players>.row').toggle();
+    </script>
+    <script src="leaderboard/js/vue.min.js"></script>
+    <script src="leaderboard/promotion2/leaderboard.js"></script>
+</body>
+
+</html>

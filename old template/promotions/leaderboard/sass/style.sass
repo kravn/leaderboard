@@ -1,0 +1,226 @@
+$default-font: Century Gothic, Arial, Helvetica, sans-serif
+$bg: #000
+$red001: #b51700
+$red002: #cf2023
+
+@mixin gradient-bar()
+  background: #fcea33
+  background: -moz-linear-gradient(top, #fcea33 0%, #f9ba02 19%, #f7a000 42%, #f9ba02 53%, #ffe000 59%, #ffe000 65%, #fddd00 86%, #fffe3e 100%)
+  background: -webkit-linear-gradient(top, #fcea33 0%,#f9ba02 19%,#f7a000 42%,#f9ba02 53%,#ffe000 59%,#ffe000 65%,#fddd00 86%,#fffe3e 100%)
+  background: linear-gradient(to bottom, #fcea33 0%,#f9ba02 19%,#f7a000 42%,#f9ba02 53%,#ffe000 59%,#ffe000 65%,#fddd00 86%,#fffe3e 100%)
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcea33', endColorstr='#fffe3e',GradientType=0 )
+
+
+
+@mixin gradient-bar2()
+  background: #4c4c4c /* Old browsers */
+  background: -moz-linear-gradient(top, #4c4c4c 0%, #595959 12%, #666666 25%, #474747 39%, #2c2c2c 50%, #000000 51%, #111111 60%, #131313 76%, #131313 91%, #131313 100%) /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #4c4c4c 0%,#595959 12%,#666666 25%,#474747 39%,#2c2c2c 50%,#000000 51%,#111111 60%,#131313 76%,#131313 91%,#131313 100%) /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #4c4c4c 0%,#595959 12%,#666666 25%,#474747 39%,#2c2c2c 50%,#000000 51%,#111111 60%,#131313 76%,#131313 91%,#131313 100%) /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=0 ) /* IE6-9 */
+
+@mixin gradient-bg()
+  background: #990000
+  background: -moz-linear-gradient(top, #990000 0%, #000000 100%)
+  background: -webkit-linear-gradient(top, #990000 0%,#000000 100%)
+  background: linear-gradient(to bottom, #990000 0%,#000000 100%)
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d0000', endColorstr='#000000',GradientType=0 )
+
+@mixin no-margins-and-paddings
+  padding: 0
+  margin: 0
+  left: 0
+  right: 0
+  top: 0
+  bottom: 0
+
+*
+  font-family: $default-font
+
+html, #app
+  background: $bg
+
+.section
+  padding: 1em
+  position: relative
+  &.no-padding
+    padding: 0
+  .section-item
+    padding: 0.5em 0
+    .title
+      font-size: 1.5em !important
+      color: #fff
+      margin-bottom: 0.5em
+      span
+        color: $red002
+        padding: 0 1em 
+        font-weight: bold
+    .content
+      padding: 0 4em
+      color: #aaa
+    .bullets
+      padding: 0 5em
+      color: #aaa
+    .table
+      margin: 0 auto
+      margin-bottom: 1em
+      color: #aaa
+      //display: flex
+      width: 90%
+      text-align: center
+      tbody
+        margin: 0 auto
+      tr
+        padding: 1em 0
+        background-color: #111
+      tr.table-head
+        font-weight: bold
+        color: #ccc
+        background-color: darken($red001, 10%)
+      tr.row1
+        background-color: darken(#111, 2%)
+      td
+        border: none
+        text-align: left
+        padding:  0.5em 3em
+  .section-title
+    color: #fff
+    font-size: 1.6em
+    padding-top: 1.5em
+  .section-header
+    color: #fff
+    font-size: 3em
+    font-weight: bold
+    padding-top: 0.5em
+    padding-bottom: 0
+    display: inline-grid
+    position: relative
+    text-shadow: 5px 5px 15px #000
+    border-bottom: 3px solid #fff
+    img
+      margin: 0 auto
+    span
+      font-size: smaller
+  .section-subheader
+    color: #fff
+    font-size: 2em
+    padding-top: 0
+    padding-bottom: 0.5em
+    display: block
+    position: relative
+    text-shadow: 5px 5px 15px #000
+  .div-separator, .div-separator-clear
+    height: 1em
+    position: relative
+  .div-separator
+    @include gradient-bar2()
+    border-top: 1px solid #000
+    box-shadow: 2em 0 2em #000, 4em 0 4em #000
+    &::after
+      content: " ."
+      background: #953705
+      width: 100%
+      height: 0.3em
+      position: absolute
+      top: 100%
+      margin-top: 0px
+      text-indent: -10em
+      z-index: 1
+  .div-separator-clear
+    background: none
+
+.section--head
+  @include gradient-bg
+  position: relative
+  padding: 1em !important
+  color: #fff
+  .gradient-overlay
+    background-image: url(../css/images/bg.png)
+    position: absolute
+    height: 100%
+    width: 100%
+    @include no-margins-and-paddings
+    opacity: 0.2
+    z-index: 0
+
+.section--body
+  .leaderboard-table
+    margin: 0 auto
+    width: 90%
+    tr
+      &.nominees
+        display: none
+        background-color: darken(#111, 4%)
+      &.row1
+        background-color: #111
+      &.row2
+        background-color: darken(#111, 2%)
+      &.see-more
+        background-color: $red001
+      &:hover
+        background-color: darken($red001, 20%)
+        td
+          font-weight: bold
+          color: darken(yellow, 20%)
+      th
+        background-color: $red001
+        padding: 0.5em
+        color: #fff
+      td
+
+        padding: 0.5em 3em
+        color: #ccc
+  .promotion-details
+    position: relative
+    display: inline-flex
+    .detail
+      padding: 1em
+      color: lighten($red002, 0%)
+      font-size: 1.2em
+      span
+        color: #fff
+        font-weight: bold
+  .participating-games
+    .badge
+      background-color: $red001
+      padding: 0.5em
+      margin: 0.3em
+      color: #fff
+      font-weight: lighter
+
+@media only screen and (max-width: 800px)
+  .section
+    .section-item
+      padding: 0
+      .title
+        font-size: 1em !important
+        span
+          padding: 0 1em 0 0
+      .content
+        font-size: 0.8em
+        padding: 0 0 0 2em
+      .table
+        td
+          padding: 0.5em
+          font-size: 0.8em
+      .bullets
+        padding: 0 2.5em
+        li
+          font-size: 0.8em
+  .section-header
+    font-size: xx-large !important
+    padding: 0 !important
+    span
+      font-size: x-large !important
+    img
+      width: 80%
+      margin: 0 auto
+  .section--body
+    .leaderboard-table
+      tr
+        td
+          padding: 0.2em
+          font-size: 12px
+    .promotion-details
+      .detail
+        font-size: 12px
