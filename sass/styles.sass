@@ -1,0 +1,190 @@
+$default-font: Century Gothic, Arial, Helvetica, sans-serif
+$bgColor01: #000
+$txtColor01: #fff
+$red01: #b51700
+$red02: #cf2023 
+
+@mixin gradient-bar()
+	background: #fcea33
+	background: -moz-linear-gradient(top, #fcea33 0%, #f9ba02 19%, #f7a000 42%, #f9ba02 53%, #ffe000 59%, #ffe000 65%, #fddd00 86%, #fffe3e 100%)
+	background: -webkit-linear-gradient(top, #fcea33 0%,#f9ba02 19%,#f7a000 42%,#f9ba02 53%,#ffe000 59%,#ffe000 65%,#fddd00 86%,#fffe3e 100%)
+	background: linear-gradient(to bottom, #fcea33 0%,#f9ba02 19%,#f7a000 42%,#f9ba02 53%,#ffe000 59%,#ffe000 65%,#fddd00 86%,#fffe3e 100%)
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcea33', endColorstr='#fffe3e',GradientType=0 )
+
+*
+	font-family: $default-font
+
+body
+	.theme--dark
+		background-color: $bgColor01 !important
+
+.section
+	.section-title
+		text-align: center
+		width: 100%
+		padding-top: 1em
+		*
+			padding: 0.1em
+		.v-image
+			max-width: 40%
+			margin: 0 auto
+	.v-card
+		background: #000 !important
+
+.section--carousel
+	position: relative
+	img
+		width: 100%
+	.div-spacer, .div-spacer-clear
+		height: 0.8em
+		position: relative
+	.div-spacer
+		@include gradient-bar()
+		box-shadow: 2em 0 2em #000, 4em 0 4em #000
+		top: 0em
+		&::after
+			content: " ."
+			background: #953705
+			width: 100%
+			height: 0.2em
+			position: absolute
+			top: 100%
+			margin-top: 0px
+			text-indent: -10em
+			z-index: 1
+	.div-spacer-clear
+		background: none
+
+.section--leaderboard
+	.layout.table-top-players
+		position: relative
+		.v-data-table
+			margin: 0 auto
+	.top-players
+		margin: 0 auto
+		tr.cell-even
+			background: lighten($bgColor01, 3%) !important
+			background-color: lighten($bgColor01, 3%) !important
+		tr.cell-odd
+			background: lighten($bgColor01, 5%) !important
+			background-color: lighten($bgColor01, 5%) !important
+		tr:hover
+			background: $red01 !important
+			background-color: $red01 !important
+		.v-datatable
+			background-color: #191919 !important
+			margin-top: 1em
+			th
+				font-size: 14px
+				background: $red01 !important
+				font-weight: bold
+			td
+				font-weight: normal !important
+				&.table-header
+					font-weight: bold !important
+					background-color: darken($red02, 10%)
+	.participating-games
+		.chips
+			display: inline-flex
+			background: $red01
+			padding: 0.3em 0.8em
+			margin: 0 0.3em
+			border-radius: 8px
+			font-size: 10px
+	.promo-details
+		text-align: center
+		p
+			span
+				color: $red01
+				display: inline-flex
+				font-weight: bold
+
+.section--promotion-details
+	.v-list
+		display: flex
+		overflow: hidden
+		padding: 0
+		.container
+			padding: 1em 0
+		.v-list__tile__title
+			font-weight: bold
+			letter-spacing: 2px
+		.tile-avatar
+			position: relative
+		.v-list__tile
+			height: auto !important
+			align-items: baseline !important
+		.v-list__tile__sub-title
+			letter-spacing: 1px
+		.list-rank
+			position: absolute
+			color: $red02
+			top: 0
+			left: 0
+			font-size: 1.3em
+			width: auto
+			height: auto
+		.list-content, .list-title, .list-sub-item
+			padding-left: 1em
+			white-space: normal
+		.promo-tables
+			.v-datatable
+				background-color: #191919 !important
+				margin-top: 1em
+				td
+					font-weight: normal !important
+					&.table-header
+						font-weight: bold !important
+						background-color: darken($red02, 10%)
+
+@media only screen and (max-width: 700px)
+	.section
+		.section-title
+			padding-top: 0
+			.v-image
+				max-width: 60%
+	.section--leaderboard
+		table.v-table tbody td, table.v-table tbody th
+			height: 30px !important
+		table.v-table thead tr
+			height: auto
+		.top-players
+			tr.cell-even, tr.cell-odd
+				padding: 0.3em
+			.v-datatable
+				th
+					font-size: 12px
+				th.stars
+					padding: 0.4em
+				td
+					font-size: 10px
+					padding: 0 5px
+					margin: 0
+					line-height: 0
+		.participating-games
+			.chips
+				font-size: 10px
+				padding: 0.3em 0.6em
+				margin: 0 0.1em
+		.promo-details
+			p
+				line-height: 1
+				span
+					font-size: 11px
+	.section--promotion-details
+		.headline
+			font-size: 16px !important
+			line-height: 25px !important
+		.list-content, .list-title, .list-sub-item
+			font-size: 12px
+		.v-card__title
+			padding: 0
+		.v-list
+			.container
+				padding: 0.5em 0
+			.promo-tables
+				.v-datatable
+					td
+						padding: 0 5px !important
+						font-size: 9px
+						height: 35px !important

@@ -1,0 +1,168 @@
+* {
+  font-family: Century Gothic, Arial, Helvetica, sans-serif; }
+
+body .theme--dark {
+  background-color: #000 !important; }
+
+.section .section-title {
+  text-align: center;
+  width: 100%;
+  padding-top: 1em; }
+  .section .section-title * {
+    padding: 0.1em; }
+  .section .section-title .v-image {
+    max-width: 40%;
+    margin: 0 auto; }
+.section .v-card {
+  background: #000 !important; }
+
+.section--carousel {
+  position: relative; }
+  .section--carousel img {
+    width: 100%; }
+  .section--carousel .div-spacer, .section--carousel .div-spacer-clear {
+    height: 0.8em;
+    position: relative; }
+  .section--carousel .div-spacer {
+    background: #fcea33;
+    background: -moz-linear-gradient(top, #fcea33 0%, #f9ba02 19%, #f7a000 42%, #f9ba02 53%, #ffe000 59%, #ffe000 65%, #fddd00 86%, #fffe3e 100%);
+    background: -webkit-linear-gradient(top, #fcea33 0%, #f9ba02 19%, #f7a000 42%, #f9ba02 53%, #ffe000 59%, #ffe000 65%, #fddd00 86%, #fffe3e 100%);
+    background: linear-gradient(to bottom, #fcea33 0%, #f9ba02 19%, #f7a000 42%, #f9ba02 53%, #ffe000 59%, #ffe000 65%, #fddd00 86%, #fffe3e 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcea33', endColorstr='#fffe3e',GradientType=0 );
+    box-shadow: 2em 0 2em #000, 4em 0 4em #000;
+    top: 0em; }
+    .section--carousel .div-spacer::after {
+      content: " .";
+      background: #953705;
+      width: 100%;
+      height: 0.2em;
+      position: absolute;
+      top: 100%;
+      margin-top: 0px;
+      text-indent: -10em;
+      z-index: 1; }
+  .section--carousel .div-spacer-clear {
+    background: none; }
+
+.section--leaderboard .layout.table-top-players {
+  position: relative; }
+  .section--leaderboard .layout.table-top-players .v-data-table {
+    margin: 0 auto; }
+.section--leaderboard .top-players {
+  margin: 0 auto; }
+  .section--leaderboard .top-players tr.cell-even {
+    background: #080808 !important;
+    background-color: #080808 !important; }
+  .section--leaderboard .top-players tr.cell-odd {
+    background: #0d0d0d !important;
+    background-color: #0d0d0d !important; }
+  .section--leaderboard .top-players tr:hover {
+    background: #b51700 !important;
+    background-color: #b51700 !important; }
+  .section--leaderboard .top-players .v-datatable {
+    background-color: #191919 !important;
+    margin-top: 1em; }
+    .section--leaderboard .top-players .v-datatable th {
+      font-size: 14px;
+      background: #b51700 !important;
+      font-weight: bold; }
+    .section--leaderboard .top-players .v-datatable td {
+      font-weight: normal !important; }
+      .section--leaderboard .top-players .v-datatable td.table-header {
+        font-weight: bold !important;
+        background-color: #a3191c; }
+.section--leaderboard .participating-games .chips {
+  display: inline-flex;
+  background: #b51700;
+  padding: 0.3em 0.8em;
+  margin: 0 0.3em;
+  border-radius: 8px;
+  font-size: 10px; }
+.section--leaderboard .promo-details {
+  text-align: center; }
+  .section--leaderboard .promo-details p span {
+    color: #b51700;
+    display: inline-flex;
+    font-weight: bold; }
+
+.section--promotion-details .v-list {
+  display: flex;
+  overflow: hidden;
+  padding: 0; }
+  .section--promotion-details .v-list .container {
+    padding: 1em 0; }
+  .section--promotion-details .v-list .v-list__tile__title {
+    font-weight: bold;
+    letter-spacing: 2px; }
+  .section--promotion-details .v-list .tile-avatar {
+    position: relative; }
+  .section--promotion-details .v-list .v-list__tile {
+    height: auto !important;
+    align-items: baseline !important; }
+  .section--promotion-details .v-list .v-list__tile__sub-title {
+    letter-spacing: 1px; }
+  .section--promotion-details .v-list .list-rank {
+    position: absolute;
+    color: #cf2023;
+    top: 0;
+    left: 0;
+    font-size: 1.3em;
+    width: auto;
+    height: auto; }
+  .section--promotion-details .v-list .list-content, .section--promotion-details .v-list .list-title, .section--promotion-details .v-list .list-sub-item {
+    padding-left: 1em;
+    white-space: normal; }
+  .section--promotion-details .v-list .promo-tables .v-datatable {
+    background-color: #191919 !important;
+    margin-top: 1em; }
+    .section--promotion-details .v-list .promo-tables .v-datatable td {
+      font-weight: normal !important; }
+      .section--promotion-details .v-list .promo-tables .v-datatable td.table-header {
+        font-weight: bold !important;
+        background-color: #a3191c; }
+
+@media only screen and (max-width: 700px) {
+  .section .section-title {
+    padding-top: 0; }
+    .section .section-title .v-image {
+      max-width: 60%; }
+
+  .section--leaderboard table.v-table tbody td, .section--leaderboard table.v-table tbody th {
+    height: 30px !important; }
+  .section--leaderboard table.v-table thead tr {
+    height: auto; }
+  .section--leaderboard .top-players tr.cell-even, .section--leaderboard .top-players tr.cell-odd {
+    padding: 0.3em; }
+  .section--leaderboard .top-players .v-datatable th {
+    font-size: 12px; }
+  .section--leaderboard .top-players .v-datatable th.stars {
+    padding: 0.4em; }
+  .section--leaderboard .top-players .v-datatable td {
+    font-size: 10px;
+    padding: 0 5px;
+    margin: 0;
+    line-height: 0; }
+  .section--leaderboard .participating-games .chips {
+    font-size: 10px;
+    padding: 0.3em 0.6em;
+    margin: 0 0.1em; }
+  .section--leaderboard .promo-details p {
+    line-height: 1; }
+    .section--leaderboard .promo-details p span {
+      font-size: 11px; }
+
+  .section--promotion-details .headline {
+    font-size: 16px !important;
+    line-height: 25px !important; }
+  .section--promotion-details .list-content, .section--promotion-details .list-title, .section--promotion-details .list-sub-item {
+    font-size: 12px; }
+  .section--promotion-details .v-card__title {
+    padding: 0; }
+  .section--promotion-details .v-list .container {
+    padding: 0.5em 0; }
+  .section--promotion-details .v-list .promo-tables .v-datatable td {
+    padding: 0 5px !important;
+    font-size: 9px;
+    height: 35px !important; } }
+
+/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Toptrendgaming</title>
+    <link href="css/vuetify.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  	<link href="css/styles.css" rel="stylesheet">
+
+    <script src="scripts/variables.js"></script>
+    <script src="scripts/vue.js"></script>
+    <script src="components/banner.js"></script>
+    <script src="components/promotion-details.js"></script>
+    <script src="components/leaderboard.js"></script>
+    <script src="components/api.js"></script>
+    <script src="scripts/vuetify.js"></script>
+    <script src="scripts/moment.js"></script>
+    <script src="scripts/axios.min.js"></script>
+    <script src="scripts/xml2json.js"></script>
+
+</head>
+<body>
+	<div id="app">
+
+		<v-app dark>
+
+			<v-content v-if="app.banner">
+				<banner
+				:image="images.banners[1].src"
+				class="section section--carousel">
+				</banner>
+			</v-content>
+			
+			<v-content>
+				<promotion-details
+				:header="labels.header"
+				:content="labels.content"
+				:lang="url.params.lang"
+				class="section section--promotion-details">
+				</promotion-details>
+			</v-content>
+
+			<v-content>
+				<leaderboard
+				:image="images.generic[1].src"
+				:general_labels="labels.general_labels[url.params.lang]"
+				:translate="getTranslation"
+				:participating_games="getParticipatingGames()"
+				:players="players"
+				class="section section--leaderboard">
+				</leaderboard>
+			</v-content>
+
+		</v-app>
+
+    </div>
+
+    <script>
+
+    	new Vue({
+            el: '#app',
+
+            data: {
+                
+                api: {
+                	getBoardByBets: '',
+                	getBoardByHandle: '',
+                	getMenu: '',
+                	getTranslations: ''
+                },
+
+                app: variables.app,
+                images: variables.images,
+                games: variables.games,
+                url: variables.url,
+                boardType: variables.app.type,
+                labels: {
+                	header: variables.headTitle,
+                	content: variables.textContents,
+                	general_labels: variables.labels,
+                },
+
+                players: {}
+
+            },
+
+            methods: {
+
+            	getParticipatingGames() {
+            		let _g = this.games[this.url.params.lang]
+            		let _pg = this.url.params.gameIds
+            		let _games = []
+            		let spl = _pg.split(',')
+            		spl.map( el => {
+            			_g.find( fObj => {
+            				if ( el == fObj.id) _games.push(fObj.name)
+            			})
+            			
+            		})
+            		return _games
+            	},
+
+            	getTranslation(_obj, keyword) {
+            		return _obj.find( obj => { return obj.key === keyword})
+            	},
+
+            	replaceTokens(token_list, url_path) {
+            		for ( var i = 0; i < token_list.length; i++ ) {
+            			url_path = url_path.replace('\${'+token_list[i]+'}', this.url.params[token_list[i]])
+            		}
+            		return url_path
+            	},
+
+            	replaceFromHash(vars) {
+            		let hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&'), hash
+            		for ( var i = 0; i < hashes.length; i++ ) {
+            			hash = hashes[i].split('=')
+            			vars[hash[0]] = hash[1];
+            		}
+            		return vars;
+            	}, 
+
+            	buildAPIData(request) {
+            		let _s = this
+            		let x2js = new X2JS();
+            		let buildData = {}
+            		axios.get( _s.api[request] )
+            			.then(response => {
+            				buildData = x2js.xml_str2json ( response.data )
+            				this.players = buildData.Leaderboard.Leader
+            			})
+            			.catch(error => {
+            				console.log('An ERROR occur : ' + error)
+            			})
+            		
+
+				},
+
+				buildAPI(url) {
+					url.map( el => {
+						this.api[el.meta] = this.replaceTokens(
+							el.tokens,
+							this.url.host + this.url.bases[el.base] + el.url_path
+						)
+					})
+				},
+            	
+            },
+
+            beforeMount() {
+            	this.replaceFromHash(this.url.params)
+            	this.buildAPI(this.url.servlets)
+            	this.buildAPIData(this.boardType)
+            },
+
+            computed: {
+
+            	now() {
+            		this.currentTime = Date.now()
+            	},
+
+            	byBets() {
+
+            	}
+
+            }
+            
+        })   
+
+    </script>
+</body>
+</html>
