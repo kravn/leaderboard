@@ -164,7 +164,7 @@ Vue.component('leaderboard', {
 									<td class="text-xs-right">{{ boardType == 'getBoardByBets' ? numberWithCommas(props.item.numberOfBets) : numberWithCommas(props.item.totalHandle) }}</td>
 									<td class="text-xs-right">{{prizes[props.index]}}</td>
 								</tr>
-								<tr v-else :class="props.index % 2 == 0 ? 'cell-even nominees' : 'cell-odd nominees'" v-show="showAllPlayers">
+								<tr v-else :class="props.index % 2 == 0 ? 'cell-even-nominees nominees' : 'cell-odd-nominees nominees'" v-show="showAllPlayers">
 									<td class="text-xs-right">{{props.index + 1}}</td>
 									<td class="text-xs-left">{{removePrefix(props.item.nickName)}}</td>
 									<td class="text-xs-right">{{ boardType == 'getBoardByBets' ? numberWithCommas(props.item.numberOfBets) : numberWithCommas(props.item.totalHandle) }}</td>

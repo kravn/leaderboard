@@ -85,14 +85,20 @@ body
 					border-bottom: 1px solid $red01
 	.top-players
 		margin: 0 auto
-		tr.nominees
-
-		tr.cell-even
+		tr.cell-odd-nominees, tr.cell-even-nominees,
+		tr.cell-even, tr.cell-odd
+			border: none
+			border-bottom: 0 !important
+		tr.cell-even-nominees, tr.cell-odd-nominees
 			background: lighten($bgColor01, 3%) !important
 			background-color: lighten($bgColor01, 3%) !important
-		tr.cell-odd
+			color: #888
+		tr.cell-even
 			background: lighten($bgColor01, 5%) !important
 			background-color: lighten($bgColor01, 5%) !important
+		tr.cell-odd
+			background: lighten($bgColor01, 7%) !important
+			background-color: lighten($bgColor01, 7%) !important
 		tr:hover
 			background: $red01 !important
 			background-color: $red01 !important
@@ -249,7 +255,7 @@ body
 						letter-spacing: 0
 						height: 35px !important
 						&.table-header
-							font-size: 11px
+							font-size: 10px
 			.list-content
 				font-size: 14px !important
 			.list-sub-item

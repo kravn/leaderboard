@@ -62,12 +62,20 @@ body {
       border-bottom: 1px solid #b51700; }
 .section--leaderboard .top-players {
   margin: 0 auto; }
-  .section--leaderboard .top-players tr.cell-even {
+  .section--leaderboard .top-players tr.cell-odd-nominees, .section--leaderboard .top-players tr.cell-even-nominees,
+  .section--leaderboard .top-players tr.cell-even, .section--leaderboard .top-players tr.cell-odd {
+    border: none;
+    border-bottom: 0 !important; }
+  .section--leaderboard .top-players tr.cell-even-nominees, .section--leaderboard .top-players tr.cell-odd-nominees {
     background: #080808 !important;
-    background-color: #080808 !important; }
-  .section--leaderboard .top-players tr.cell-odd {
+    background-color: #080808 !important;
+    color: #888; }
+  .section--leaderboard .top-players tr.cell-even {
     background: #0d0d0d !important;
     background-color: #0d0d0d !important; }
+  .section--leaderboard .top-players tr.cell-odd {
+    background: #121212 !important;
+    background-color: #121212 !important; }
   .section--leaderboard .top-players tr:hover {
     background: #b51700 !important;
     background-color: #b51700 !important; }
@@ -213,7 +221,7 @@ body {
     letter-spacing: 0;
     height: 35px !important; }
     .section--promotion-details .v-list .promo-tables .v-datatable td.table-header {
-      font-size: 11px; }
+      font-size: 10px; }
   .section--promotion-details .v-list .list-content {
     font-size: 14px !important; }
   .section--promotion-details .v-list .list-sub-item {
