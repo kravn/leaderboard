@@ -1,13 +1,16 @@
 * {
   font-family: Century Gothic, Arial, Helvetica, sans-serif; }
 
-body .theme--dark {
-  background-color: #000 !important; }
+body {
+  background-color: #000; }
+  body .theme--dark {
+    background-color: rgba(0, 0, 0, 0) !important; }
 
 .section .section-title {
   text-align: center;
   width: 100%;
-  padding-top: 1em; }
+  padding-top: 1em;
+  z-index: 1; }
   .section .section-title * {
     padding: 0.1em; }
   .section .section-title .v-image {
@@ -21,33 +24,42 @@ body .theme--dark {
   .section--carousel img {
     width: 100%; }
   .section--carousel .div-spacer, .section--carousel .div-spacer-clear {
-    height: 0.8em;
+    height: 1em;
     position: relative; }
   .section--carousel .div-spacer {
-    background: #fcea33;
-    background: -moz-linear-gradient(top, #fcea33 0%, #f9ba02 19%, #f7a000 42%, #f9ba02 53%, #ffe000 59%, #ffe000 65%, #fddd00 86%, #fffe3e 100%);
-    background: -webkit-linear-gradient(top, #fcea33 0%, #f9ba02 19%, #f7a000 42%, #f9ba02 53%, #ffe000 59%, #ffe000 65%, #fddd00 86%, #fffe3e 100%);
-    background: linear-gradient(to bottom, #fcea33 0%, #f9ba02 19%, #f7a000 42%, #f9ba02 53%, #ffe000 59%, #ffe000 65%, #fddd00 86%, #fffe3e 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcea33', endColorstr='#fffe3e',GradientType=0 );
+    background: #000000;
+    background: -moz-linear-gradient(top, #000000 1%, #191919 25%, #353535 53%, #191919 74%, #000000 100%);
+    background: -webkit-linear-gradient(top, #000000 1%, #191919 25%, #353535 53%, #191919 74%, #000000 100%);
+    background: linear-gradient(to bottom, #000000 1%, #191919 25%, #353535 53%, #191919 74%, #000000 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000',GradientType=0 );
     box-shadow: 2em 0 2em #000, 4em 0 4em #000;
-    top: 0em; }
-    .section--carousel .div-spacer::after {
-      content: " .";
-      background: #953705;
-      width: 100%;
-      height: 0.2em;
-      position: absolute;
-      top: 100%;
-      margin-top: 0px;
-      text-indent: -10em;
-      z-index: 1; }
+    top: 0em;
+    /*&::after
+     * content: " ."
+     * background: #333
+     * width: 100%
+     * height: 0.2em
+     * position: absolute
+     * top: 100%
+     * margin-top: 0px
+     * text-indent: -10em
+     * z-index: 1 */ }
   .section--carousel .div-spacer-clear {
     background: none; }
 
 .section--leaderboard .layout.table-top-players {
   position: relative; }
+  .section--leaderboard .layout.table-top-players .see-more {
+    padding: 0.5em;
+    width: 100%;
+    text-align: center;
+    background-color: #b51700; }
   .section--leaderboard .layout.table-top-players .v-data-table {
     margin: 0 auto; }
+  .section--leaderboard .layout.table-top-players .v-datatable thead {
+    border-bottom: 1px solid #b51700; }
+    .section--leaderboard .layout.table-top-players .v-datatable thead tr {
+      border-bottom: 1px solid #b51700; }
 .section--leaderboard .top-players {
   margin: 0 auto; }
   .section--leaderboard .top-players tr.cell-even {
@@ -63,11 +75,12 @@ body .theme--dark {
     background-color: #191919 !important;
     margin-top: 1em; }
     .section--leaderboard .top-players .v-datatable th {
-      font-size: 14px;
+      font-size: 18px;
       background: #b51700 !important;
       font-weight: bold; }
     .section--leaderboard .top-players .v-datatable td {
-      font-weight: normal !important; }
+      font-weight: normal !important;
+      font-size: 18px; }
       .section--leaderboard .top-players .v-datatable td.table-header {
         font-weight: bold !important;
         background-color: #a3191c; }
@@ -77,49 +90,81 @@ body .theme--dark {
   padding: 0.3em 0.8em;
   margin: 0 0.3em;
   border-radius: 8px;
-  font-size: 10px; }
+  font-size: 12px; }
 .section--leaderboard .promo-details {
-  text-align: center; }
+  text-align: center;
+  font-size: 18px; }
   .section--leaderboard .promo-details p span {
     color: #b51700;
     display: inline-flex;
     font-weight: bold; }
 
-.section--promotion-details .v-list {
-  display: flex;
+.section--promotion-details {
   overflow: hidden;
-  padding: 0; }
-  .section--promotion-details .v-list .container {
-    padding: 1em 0; }
-  .section--promotion-details .v-list .v-list__tile__title {
-    font-weight: bold;
-    letter-spacing: 2px; }
-  .section--promotion-details .v-list .tile-avatar {
-    position: relative; }
-  .section--promotion-details .v-list .v-list__tile {
-    height: auto !important;
-    align-items: baseline !important; }
-  .section--promotion-details .v-list .v-list__tile__sub-title {
-    letter-spacing: 1px; }
-  .section--promotion-details .v-list .list-rank {
-    position: absolute;
-    color: #cf2023;
-    top: 0;
-    left: 0;
-    font-size: 1.3em;
-    width: auto;
-    height: auto; }
-  .section--promotion-details .v-list .list-content, .section--promotion-details .v-list .list-title, .section--promotion-details .v-list .list-sub-item {
-    padding-left: 1em;
-    white-space: normal; }
-  .section--promotion-details .v-list .promo-tables .v-datatable {
-    background-color: #191919 !important;
-    margin-top: 1em; }
-    .section--promotion-details .v-list .promo-tables .v-datatable td {
-      font-weight: normal !important; }
-      .section--promotion-details .v-list .promo-tables .v-datatable td.table-header {
-        font-weight: bold !important;
-        background-color: #a3191c; }
+  z-index: 0; }
+  .section--promotion-details .headline h1 {
+    text-decoration: underline; }
+  .section--promotion-details .v-list {
+    display: flex;
+    overflow: hidden;
+    padding: 0; }
+    .section--promotion-details .v-list .container {
+      padding: 1em 0; }
+    .section--promotion-details .v-list .v-list__tile__title {
+      font-weight: bold;
+      letter-spacing: 2px; }
+    .section--promotion-details .v-list .tile-avatar {
+      position: relative; }
+    .section--promotion-details .v-list .v-list__tile {
+      height: auto !important;
+      align-items: baseline !important; }
+    .section--promotion-details .v-list .v-list__tile__sub-title {
+      letter-spacing: 1px; }
+    .section--promotion-details .v-list .list-rank {
+      position: absolute;
+      color: #cf2023;
+      top: 0;
+      left: 0;
+      font-size: 18px;
+      width: auto;
+      height: auto; }
+    .section--promotion-details .v-list .list-content, .section--promotion-details .v-list .list-title, .section--promotion-details .v-list .list-sub-item {
+      padding-left: 1em;
+      white-space: normal;
+      font-size: 18px;
+      list-style: square; }
+    .section--promotion-details .v-list .promo-tables .v-datatable {
+      background-color: #191919 !important;
+      margin-top: 1em; }
+      .section--promotion-details .v-list .promo-tables .v-datatable td {
+        font-weight: normal !important;
+        font-size: 18px;
+        background: #121212; }
+        .section--promotion-details .v-list .promo-tables .v-datatable td.table-header {
+          font-weight: bold !important;
+          background-color: #a3191c;
+          font-size: 18px; }
+
+.no-wrap {
+  padding: 0;
+  margin: 0;
+  padding-top: 0.5em !important; }
+
+.the-gradient {
+  position: absolute;
+  width: 100%;
+  height: 30vh;
+  min-height: 250px;
+  background: #b51700;
+  background: -moz-linear-gradient(top, #b51700 0%, #000000 100%);
+  background: -webkit-linear-gradient(top, #b51700 0%, #000000 100%);
+  background: linear-gradient(to bottom, #b51700 0%, #000000 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b51700', endColorstr='#000000',GradientType=0 ); }
+
+.patterns {
+  background: url(css/images/bg.png) repeat;
+  height: 100%;
+  opacity: 0.2; }
 
 @media only screen and (max-width: 700px) {
   .section .section-title {
@@ -127,6 +172,8 @@ body .theme--dark {
     .section .section-title .v-image {
       max-width: 60%; }
 
+  .section--leaderboard .layout.table-top-players .see-more > i {
+    font-size: 10px; }
   .section--leaderboard table.v-table tbody td, .section--leaderboard table.v-table tbody th {
     height: 30px !important; }
   .section--leaderboard table.v-table thead tr {
@@ -134,11 +181,11 @@ body .theme--dark {
   .section--leaderboard .top-players tr.cell-even, .section--leaderboard .top-players tr.cell-odd {
     padding: 0.3em; }
   .section--leaderboard .top-players .v-datatable th {
-    font-size: 12px; }
+    font-size: 14px; }
   .section--leaderboard .top-players .v-datatable th.stars {
     padding: 0.4em; }
   .section--leaderboard .top-players .v-datatable td {
-    font-size: 10px;
+    font-size: 14px;
     padding: 0 5px;
     margin: 0;
     line-height: 0; }
@@ -162,7 +209,14 @@ body .theme--dark {
     padding: 0.5em 0; }
   .section--promotion-details .v-list .promo-tables .v-datatable td {
     padding: 0 5px !important;
-    font-size: 9px;
-    height: 35px !important; } }
+    font-size: 11px;
+    letter-spacing: 0;
+    height: 35px !important; }
+    .section--promotion-details .v-list .promo-tables .v-datatable td.table-header {
+      font-size: 11px; }
+  .section--promotion-details .v-list .list-content {
+    font-size: 14px !important; }
+  .section--promotion-details .v-list .list-sub-item {
+    font-size: 14px !important; } }
 
 /*# sourceMappingURL=styles.css.map */

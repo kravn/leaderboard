@@ -6,18 +6,25 @@ Vue.component('promotion-details', {
 			
 		}
 	},
+
 	template:
 	`	
 		<div>
-			
+
 			<v-card>
 				<v-layout row wrap>
 					<v-flex xs12>
-						<v-card-title>
+						<v-card-title class="no-wrap">
+
 							<div class="section-title headline">
 								<h1>{{header[0].title}}</h1>
 								<h3>{{header[0].subtitle}}</h3>
 							</div>
+							<div class="the-gradient">
+						        <div class="patterns" 
+						        style="background:url(css/images/bg.png) repeat;height:100%;">
+						        </div>
+						    </div>
 						</v-card-title>
 						<v-layout>
 							<v-container>

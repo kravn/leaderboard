@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Toptrendgaming</title>
     <link href="css/vuetify.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
@@ -24,6 +25,7 @@
 
 </head>
 <body>
+
 	<div id="app">
 
 		<v-app dark>
@@ -66,6 +68,7 @@
 
             data: {
                 
+                appTitle: 'Welcome!',
                 api: {
                 	getBoardByBets: '',
                 	getBoardByHandle: '',
@@ -77,7 +80,7 @@
                 images: variables.images,
                 games: variables.games,
                 url: variables.url,
-                boardType: variables.app.type,
+                boardType: variables.app.boardType,
                 labels: {
                 	header: variables.headTitle,
                 	content: variables.textContents,
@@ -125,16 +128,16 @@
             	}, 
 
             	buildAPIData(request) {
-            		let _s = this
+                    let _s = this
             		let x2js = new X2JS();
             		let buildData = {}
-            		axios.get( _s.api[request] )
+                    axios.get( _s.api[request] )
             			.then(response => {
             				buildData = x2js.xml_str2json ( response.data )
             				this.players = buildData.Leaderboard.Leader
             			})
             			.catch(error => {
-            				console.log('An ERROR occur : ' + error)
+                            console.log('An ERROR occur : ' + error)
             			})
             		
 

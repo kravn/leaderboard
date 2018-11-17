@@ -17,10 +17,13 @@ Vue.component('leaderboard', {
 			prefix: variables.app.operatorPrefix,
 			characterMask: variables.app.stringMask,
 			lang: variables.url.params.lang,
-			boardType: variables.app.type,
+			topPlayers: variables.url.params.topNumLimit,
+			topPlayersMax: variables.url.params.topNum,
+			boardType: variables.app.boardType,
 			prizes: variables.prizes,
 			headers: variables.app.leaderboardTableHeader,
 			labels: variables.labels,
+			showAllPlayers: false,
 		}
 	},
 
@@ -54,6 +57,10 @@ Vue.component('leaderboard', {
 			return heads
 		},
 
+		changeCharacter(label) {
+			return label.replace('?', this.topPlayers)
+		},
+
 		removePrefix(player_name) {
 			let _name = ''
 			let _masked_name = ''
@@ -69,6 +76,10 @@ Vue.component('leaderboard', {
 			}
 			return _masked_name
 		},
+
+		togglePlayers() {
+			this.showAllPlayers = this.showAllPlayers ? false : true
+		}
 		
 	},
 
@@ -117,8 +128,13 @@ Vue.component('leaderboard', {
 			</v-container>
 
 			<v-container>
-				<v-layout class="table-top-players">
-					
+				<v-layout row wrap class="table-top-players">
+					<v-flex md12>
+						<div class="section-title">
+							<h2>{{ changeCharacter( translate(general_labels, 'top_players').label) }}</h2>
+						</div>
+					</v-flex>
+					<v-flex md12>
 						<v-data-table
 						:headers="prepareHeaders(headers[boardType])"
 						:items="players"
@@ -130,7 +146,7 @@ Vue.component('leaderboard', {
 							slot-scope="props">
 								<tr>
 									<th class="text-xs-right stars">
-										<i class="material-icons">star</i>
+										<i class="fas fa-trophy"></i>
 									</th>
 									<th v-for="(header, key) in props.headers"
 									:key="header.value"
@@ -142,15 +158,33 @@ Vue.component('leaderboard', {
 							<template
 							slot="items"
 							slot-scope="props">
-								<tr :class="props.index % 2 == 0 ? 'cell-even' : 'cell-odd'">
+								<tr v-if="props.index < topPlayers" :class="props.index % 2 == 0 ? 'cell-even' : 'cell-odd'">
 									<td class="text-xs-right">{{props.index + 1}}</td>
 									<td class="text-xs-left">{{removePrefix(props.item.nickName)}}</td>
 									<td class="text-xs-right">{{ boardType == 'getBoardByBets' ? numberWithCommas(props.item.numberOfBets) : numberWithCommas(props.item.totalHandle) }}</td>
 									<td class="text-xs-right">{{prizes[props.index]}}</td>
 								</tr>
+								<tr v-else :class="props.index % 2 == 0 ? 'cell-even nominees' : 'cell-odd nominees'" v-show="showAllPlayers">
+									<td class="text-xs-right">{{props.index + 1}}</td>
+									<td class="text-xs-left">{{removePrefix(props.item.nickName)}}</td>
+									<td class="text-xs-right">{{ boardType == 'getBoardByBets' ? numberWithCommas(props.item.numberOfBets) : numberWithCommas(props.item.totalHandle) }}</td>
+									<td class="text-xs-right">--</td>
+								</tr>
+
 							</template>
+
 						</v-data-table>
-					
+						<div class="see-more" @click="togglePlayers">
+							<i class="material-icons" v-if="!showAllPlayers">
+								arrow_drop_down
+								{{ translate(general_labels, 'show_more').label }}
+							</i>
+							<i class="material-icons" v-else>
+								arrow_drop_up
+								{{ translate(general_labels, 'show_less').label }}
+							</i>
+						</div>
+					</v-flex>
 				</v-layout>
 			</v-container>
 		</div>

@@ -24,7 +24,7 @@ var variables = function() {
             banner: true,
             termsAndConditions: false,
             deviceUsed: '',
-            type: 'getBoardByBets', // getBoardByBets or getBoardByHandle
+            boardType: 'getBoardByBets', // getBoardByBets or getBoardByHandle
             leaderboardTableHeader: {
                 getBoardByBets: [
                     { sortable: false, text: '',  value: 'player' },
@@ -49,8 +49,8 @@ var variables = function() {
                 lang: 'cn',
                 lsdId: 'longfa123',
                 toDate: '11/1/2018',
-                topNum: 50,
-                topNumLimit: 20,
+                topNum: 100, 
+                topNumLimit: 50,
             },
             bases: {
                 imagesUrl: 'player/assets/images/games/',
@@ -230,19 +230,19 @@ var variables = function() {
             cn: [
                 {
                     id: 1,
-                    title: '活动时间:',
+                    title: '活动时间 :',
                     content: '北京时间2018年11月12日 至 2018年11月15日(共4天)',
                     type: 'sentence',
                 },
                 {
                     id: 2,
-                    title: '活动总奖金:',
+                    title: '活动总奖金 :',
                     content: '3,888 人民币+720次免费旋转',
                     type: 'sentence',
                 },
                 {
                     id: 3,
-                    title: '活动总奖金+免费旋转列表:',
+                    title: '活动总奖金+免费旋转列表 :',
                     content: '',
                     type: 'table',
                     children: {
@@ -311,7 +311,7 @@ var variables = function() {
                 },
                 {
                     id: 7,
-                    title: '排行榜',
+                    title: '排行榜 :',
                     content: '',
                     type: 'sentence',
                 },
