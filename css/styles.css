@@ -225,6 +225,9 @@ body {
   .section--promotion-details .v-list .list-content {
     font-size: 14px !important; }
   .section--promotion-details .v-list .list-sub-item {
-    font-size: 14px !important; } }
+    font-size: 14px !important; }
+
+  .v-image {
+    height: 120px; } }
 
 /*# sourceMappingURL=styles.css.map */
